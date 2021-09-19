@@ -6,6 +6,12 @@ function Users() {
 
     const [users, setUser] = useState([]);
 
+    let { id } = useParams();
+    let id = parseInt({ id } = useParams());
+    let userP = users.map(user => user.id).indexOf(id);
+    let user = (users[userP]);
+    console.log(user);
+
     useEffect(() => {
         const getUser = () => {
             axios.get('https://jsonplaceholder.typicode.com/users').then((res) => {
@@ -15,15 +21,11 @@ function Users() {
         getUser();
     }, [])
 
-    let id = parseInt(useParams().id);
-    let userP = users.map(user => user.id).indexOf(id);
-    let user = (users[userP]);
-    console.log(user);
 
     if (!user) {
         return null;
     }
-    
+
     return (
         <div className="container">
             <h1 className="mt-4 mb-4">User</h1>
@@ -31,7 +33,7 @@ function Users() {
                 <table className="table mb-4">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
                             <th scope="col">Full name</th>
                             <th scope="col">Username</th>
                             <th scope="col">E-mail</th>
